@@ -10,8 +10,8 @@ public class CapacitorTapJackingPlugin: CAPPlugin, CAPBridgedPlugin {
     public let identifier = "CapacitorTapJackingPlugin"
     public let jsName = "TapJacking"
     public let pluginMethods: [CAPPluginMethod] = [
-        CAPPluginMethod(name: "preventOverlays", returnType: CAPPluginReturnPromise),
-        CAPPluginMethod(name: "enableOverlays", returnType: CAPPluginReturnPromise)
+        CAPPluginMethod(name: "preventOverlays", returnType: .promise),
+        CAPPluginMethod(name: "enableOverlays", returnType: .promise)
     ]
 
     @objc func preventOverlays(_ call: CAPPluginCall) {
