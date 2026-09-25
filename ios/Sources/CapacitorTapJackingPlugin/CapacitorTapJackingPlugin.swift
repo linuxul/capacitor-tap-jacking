@@ -9,16 +9,17 @@ import Capacitor
 public class CapacitorTapJackingPlugin: CAPPlugin, CAPBridgedPlugin {
     public let identifier = "CapacitorTapJackingPlugin"
     public let jsName = "TapJacking"
+    // Overlays are an Android concern: on iOS both methods only resolve, synchronously.
     public let pluginMethods: [CAPPluginMethod] = [
-        CAPPluginMethod(name: "preventOverlays", returnType: .promise),
-        CAPPluginMethod(name: "enableOverlays", returnType: .promise)
+        .promise("preventOverlays", CapacitorTapJackingPlugin.preventOverlays),
+        .promise("enableOverlays", CapacitorTapJackingPlugin.enableOverlays)
     ]
 
-    @objc func preventOverlays(_ call: CAPPluginCall) {
+    func preventOverlays(_ call: CAPPluginCall) {
         call.resolve()
     }
 
-    @objc func enableOverlays(_ call: CAPPluginCall) {
+    func enableOverlays(_ call: CAPPluginCall) {
         call.resolve()
     }
 }
