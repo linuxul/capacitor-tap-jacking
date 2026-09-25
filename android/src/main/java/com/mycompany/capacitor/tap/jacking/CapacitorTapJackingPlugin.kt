@@ -3,6 +3,7 @@ package com.mycompany.capacitor.tap.jacking
 import com.getcapacitor.Plugin
 import com.getcapacitor.PluginCall
 import com.getcapacitor.PluginMethod
+import com.getcapacitor.PluginThread
 import com.getcapacitor.annotation.CapacitorPlugin
 
 @CapacitorPlugin(name = "TapJacking")
@@ -13,19 +14,16 @@ public class CapacitorTapJackingPlugin : Plugin() {
         implementation = CapacitorTapJacking(bridge.activity)
     }
 
-    @PluginMethod
+    // Both change the activity's window, which belongs to the main thread
+    @PluginMethod(thread = PluginThread.MAIN)
     public fun preventOverlays(call: PluginCall) {
-        bridge.activity.runOnUiThread {
-            implementation.preventOverlays()
-            call.resolve()
-        }
+        implementation.preventOverlays()
+        call.resolve()
     }
 
-    @PluginMethod
+    @PluginMethod(thread = PluginThread.MAIN)
     public fun enableOverlays(call: PluginCall) {
-        bridge.activity.runOnUiThread {
-            implementation.enableOverlays()
-            call.resolve()
-        }
+        implementation.enableOverlays()
+        call.resolve()
     }
 }
